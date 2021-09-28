@@ -23,4 +23,3 @@
     // obtaining the entity manager
     $entityManager = EntityManager::create($conn, $config);
 
-    var_dump($entityManager);

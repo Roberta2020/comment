@@ -9,5 +9,13 @@
     "require": {
         "doctrine/orm": "^2.9",
         "symfony/cache": "^5.3"
+    },
+    "autoload": {
+        "psr-4": { 
+			"Comment\\": "src/models/",
+            "Reply\\": "src/models/"
+		}
     }
+
+
 }

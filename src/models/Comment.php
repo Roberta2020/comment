@@ -1,5 +1,8 @@
 <?php
+namespace Comment;
+
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="comments")
@@ -29,22 +32,9 @@ class Comment
   protected $comment;
 
   /** 
-   * @ORM\Column(type="integer")
-   * @ORM\OneToMany(targetEntity="Comment", mappedBy="id", cascade={"persist"})
-   * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-   */
-  protected $post_id;
-
-/** 
-   * @ORM\Column(type="datetime")
-   */
-  protected $created_at;
-
-/** 
-   * @ORM\Column(type="integer")
-   */
-  protected $reply_of;
-
+     * @ORM\Column(name="created_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    protected $created_at;
 
 
 
@@ -85,16 +75,6 @@ class Comment
     return $this->comment;
   }
 
-  public function setPostid($post_id)
-  {
-    $this->post_id = $post_id;
-  }
-
-  public function getPostid()
-  {
-    return $this->post_id;
-  }
-
   public function setCreatedat($created_at)
   {
     $this->created_at = $created_at;
@@ -102,14 +82,5 @@ class Comment
   public function getCreatedat()
   {
     return $this->created_at;
-  }
-
-  public function setReplyof($reply_of)
-  {
-    $this->reply_of = $reply_of;
-  }
-  public function getReplyof()
-  {
-    return $this->reply_of;
   }
 }
