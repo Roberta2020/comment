@@ -24,10 +24,9 @@ if (
     $comment->setEmail($_POST['comment_email']);
     $comment->setName($_POST['comment_name']);
     $comment->setComment($_POST['comment_comment']);
-    $comment->setCreatedat(date('Y-m-d H:i:s'));
-
-// TODO DATA NESISPAUSDINA NES ISREIKSTA STRINGU, O REIKIA DATETIME
-
+    $now = date('Y-m-d H:i:s');
+    $date = DateTime::createFromFormat('Y-m-d H:i:s', $now);
+    $comment->setCreatedat($date);
     $entityManager->persist($comment);
     $entityManager->flush();
     redirect_to_root();
@@ -96,7 +95,8 @@ if (
                         <div class="media g-mb-30 media-comment">
                             <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                                 <form action="" method="post">
-                        <?php echo  "<input type='hidden' name='comment_created_at' value='".date('Y-m-d H:i:s')."' required>"; ?>
+                        <?php $date = new DateTime('now');
+                                echo  "<input type='hidden' name='comment_created_at' value='". $date->format('Y-m-d H:i:s') ."' required>"; ?>
                                     <p>
                                         <label>Your name</label>
                                         <input class="h5 g-color-gray-dark-v1 mb-0" style="width:70%; float:right;" type="text" name="comment_name" required>
@@ -131,7 +131,7 @@ if (
                     <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                         <div class="g-mb-15">
                             <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $comment->getName() . '</h5>
-                            <span class="g-color-gray-dark-v4 g-font-size-12">' . date("F d, Y h:i a", strtotime('$comment->getCreatedat()')) . '</span>
+                            <span class="g-color-gray-dark-v4 g-font-size-12">' . $date->format('F d, Y h:i a') . '</span>
                         </div>
                     
                         <p>' . $comment->getComment() . '</p>
