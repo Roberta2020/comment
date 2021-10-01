@@ -67,6 +67,9 @@ if (
     <title>Comments</title>
 </head>
 <body>
+
+<!-- TODO SUKURTI STRAIPSNI KAD BUTU TINKAMA COMMENT SECTION -->
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <div class="container">
         <div class="row" style="justify-content: center;">
@@ -101,11 +104,15 @@ if (
                 </div>
             </div>
             <?php
+
+// TODO PAKEISTI KAD NEBUTU BALTO IMG FONO
+// TODO PASTYLINT REPLY SECTION 
+
             $comments = $entityManager->getRepository('Comment\Comment')->findAll();            
             foreach ($comments as $comment) {
                 print(' <div class="col-md-8">
                 <div class="media g-mb-30 media-comment">
-                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
+                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat1.jpg" alt="Image Description">
                     <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                         <div class="g-mb-15">
                             <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $comment->getName() . '</h5>
@@ -151,7 +158,7 @@ if (
                     if($comment->getId() == $reply->getPostid()) {
                     print(' <div class="g-bg-reply">
                                         <div>
-                                            <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
+                                            <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat1.jpg" alt="Image Description">
                                             <div class="">
                                                 <div class="">
                                                     <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $reply->getName() . '</h5>
@@ -168,6 +175,9 @@ if (
             ?>
 </body>
 <script>
+
+// TODO PAKEISTI KAD PASPAUDZIANT NEBUTU NUSOKAMA I VIRSU 
+
     function showReplyForm(self) {
         var commentId = self.getAttribute("data-id");
         if (document.getElementById("form-" + commentId).style.display == "") {
