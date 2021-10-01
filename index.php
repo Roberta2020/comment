@@ -15,14 +15,14 @@ function redirect_to_root()
 // Add comment
 if (
     isset($_POST['add_comment'])
-    && !empty($_POST['comment_email'])
     && !empty($_POST['comment_name'])
+    && !empty($_POST['comment_email'])
     && !empty($_POST['comment_comment'])
     && !empty($_POST['comment_created_at'])
 ) {
     $comment = new Comment();
-    $comment->setEmail($_POST['comment_email']);
     $comment->setName($_POST['comment_name']);
+    $comment->setEmail($_POST['comment_email']);
     $comment->setComment($_POST['comment_comment']);
     $now = date('Y-m-d H:i:s');
     $date = DateTime::createFromFormat('Y-m-d H:i:s', $now);
@@ -35,37 +35,34 @@ if (
 // Do reply
 if (
     isset($_POST['do_reply'])
-    && !empty($_POST['reply_email'])
     && !empty($_POST['reply_name'])
+    && !empty($_POST['reply_email'])
     && !empty($_POST['reply_comment'])
     && !empty($_POST['reply_post_id'])
+    && !empty($_POST['reply_created_at'])
 ) {
     $reply = new Reply();
-    $reply->setEmail($_POST['reply_email']);
     $reply->setName($_POST['reply_name']);
+    $reply->setEmail($_POST['reply_email']);
     $reply->setComment($_POST['reply_comment']);
 
-
+// TODO PADARYTI VEIKIANCIA REPLY FORMA - COMMENT ID PRISKIRIMAS PRIE POST ID
+    
     // $comment = $entityManager->getRepository('Comment\Comment')->findOneBy($comment_id);
-    // $comment = $this->$entityManager->getReference('Comment\Comment', $comment->getId());
-    // $comment = $this->$entityManager->getReference('Comment\Comment', $id);
-    // $comment = $this->$entityManager->getReference('Comment\Comment', $_POST['comment_id']);    
     // $comment = $entityManager->getReference('Comment\Comment', $comment->getId());
     // $comment = $entityManager->getReference('Comment\Comment', $id);
     // $comment = $entityManager->getReference('Comment\Comment', $_POST['comment_id']);
-    // $comment = $this->$entityManager->getRepository('Comment\Comment')->find($id);
-    // $comment = $this->$entityManager->getRepository('Comment\Comment')->find($comment->getId());
-    // $comment = $this->$entityManager->getRepository('Comment\Comment')->find($_POST['comment_id']);
     // $comment = $entityManager->getRepository('Comment\Comment')->find($id);
     // $comment = $entityManager->getRepository('Comment\Comment')->find($comment->getId());
     // $comment = $entityManager->getRepository('Comment\Comment')->find($_POST['comment_id']);
     // $comment = $entityManager->find('Comment\Comment',  $_POST['comment_id']);
     // $comment = $entityManager->find('Comment\Comment', $id);
     // $comment = $entityManager->find('Comment\Comment', $comment->getId());
-    // $comment = $this->$entityManager->find('Comment\Comment', $_POST['comment_id']);
-    // $comment = $this->$entityManager->find('Comment\Comment', $comment->getId());
-    // $comment = $this->$entityManager->find('Comment\Comment', $id);
-    $reply->setPostid($comment);
+
+    $reply->setPostid($_POST['reply_post_id']);
+    $now = date('Y-m-d H:i:s');
+    $date = DateTime::createFromFormat('Y-m-d H:i:s', $now);
+    $reply->setCreatedat($date);
     $entityManager->persist($reply);
     $entityManager->flush();
     redirect_to_root();
@@ -121,9 +118,7 @@ if (
 
 
             <?php
-            $comments = $entityManager->getRepository('Comment\Comment')->findAll();
-            // $date1 = strtr($_REQUEST['comment_created_at'], '/', '-');
-            
+            $comments = $entityManager->getRepository('Comment\Comment')->findAll();            
             foreach ($comments as $comment) {
                 print(' <div class="col-md-8">
                 <div class="media g-mb-30 media-comment">
@@ -145,8 +140,10 @@ if (
                                 <div class="media g-mb-30 media-comment">
                                     <div class="media-body u-shadow-v18 g-pa-30" style="border:1px solid;  border-radius: 10px;">
                                         <form action="" method="post">
-                                        <input type="hidden" name="post_id" value="' . $comment->getId() . '" required>
-                                            <p>
+                                        <input type="hidden" name="reply_post_id" value="' . $comment->getId() . '" required>');
+                                        $date = new DateTime('now');
+                                        print(' <input type="hidden" name="reply_created_at" value=". $date->format(\'Y-m-d H:i:s\') ." required>   
+                                        <p>
                                                 <label>Your name</label>
                                                 <input class="h5 g-color-gray-dark-v1 mb-0" style="width:70%; float:right;" type="text" name="reply_name" required>
                                             </p>
@@ -185,12 +182,12 @@ if (
                 foreach ($replies as $reply) {
                     print(' <div class="g-bg-reply">
                                         <div>
-                                         <input type="hidden" name="post_id" value="' . $comment->getId() . '" required>
+                                         <input type="hidden" name="reply_post_id" value="' . $comment->getId() . '" required>
                                             <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
                                             <div class="">
                                                 <div class="">
                                                     <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $reply->getName() . '</h5>
-                                                        <span class="g-color-gray-dark-v4 g-font-size-12">' . date("F d, Y h:i a", strtotime('$reply->getCreatedat')) . '</span>
+                                                        <span class="g-color-gray-dark-v4 g-font-size-12">' . $date->format('F d, Y h:i a') . '</span>
                                                 </div>
                                             </div>            <p>' . $reply->getComment() . '</p>
                                         </div>
