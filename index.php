@@ -45,20 +45,6 @@ if (
     $reply->setName($_POST['reply_name']);
     $reply->setEmail($_POST['reply_email']);
     $reply->setComment($_POST['reply_comment']);
-
-// TODO PADARYTI VEIKIANCIA REPLY FORMA - COMMENT ID PRISKIRIMAS PRIE POST ID
-    
-    // $comment = $entityManager->getRepository('Comment\Comment')->findOneBy($comment_id);
-    // $comment = $entityManager->getReference('Comment\Comment', $comment->getId());
-    // $comment = $entityManager->getReference('Comment\Comment', $id);
-    // $comment = $entityManager->getReference('Comment\Comment', $_POST['comment_id']);
-    // $comment = $entityManager->getRepository('Comment\Comment')->find($id);
-    // $comment = $entityManager->getRepository('Comment\Comment')->find($comment->getId());
-    // $comment = $entityManager->getRepository('Comment\Comment')->find($_POST['comment_id']);
-    // $comment = $entityManager->find('Comment\Comment',  $_POST['comment_id']);
-    // $comment = $entityManager->find('Comment\Comment', $id);
-    // $comment = $entityManager->find('Comment\Comment', $comment->getId());
-
     $reply->setPostid($_POST['reply_post_id']);
     $now = date('Y-m-d H:i:s');
     $date = DateTime::createFromFormat('Y-m-d H:i:s', $now);
@@ -80,7 +66,6 @@ if (
     <link rel="stylesheet" href="style.css">
     <title>Comments</title>
 </head>
-
 <body>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <div class="container">
@@ -115,8 +100,6 @@ if (
                     </div>
                 </div>
             </div>
-
-
             <?php
             $comments = $entityManager->getRepository('Comment\Comment')->findAll();            
             foreach ($comments as $comment) {
@@ -128,7 +111,6 @@ if (
                             <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $comment->getName() . '</h5>
                             <span class="g-color-gray-dark-v4 g-font-size-12">' . $date->format('F d, Y h:i a') . '</span>
                         </div>
-                    
                         <p>' . $comment->getComment() . '</p>
                         <a data-id="' . $comment->getId() . '" onclick="showReplyForm(this)" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">
                             <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
@@ -143,7 +125,7 @@ if (
                                         <input type="hidden" name="reply_post_id" value="' . $comment->getId() . '" required>');
                                         $date = new DateTime('now');
                                         print(' <input type="hidden" name="reply_created_at" value=". $date->format(\'Y-m-d H:i:s\') ." required>   
-                                        <p>
+                                            <p>
                                                 <label>Your name</label>
                                                 <input class="h5 g-color-gray-dark-v1 mb-0" style="width:70%; float:right;" type="text" name="reply_name" required>
                                             </p>
@@ -155,7 +137,6 @@ if (
                                                 <label>Comment</label>
                                                 <textarea class="g-color-gray-dark-v4 g-font-size-12" style="width: 100%;" name="reply_comment" required></textarea>
                                             </p>
-        
                                             <p>
                                                 <input type="submit" class="button" value="Reply" name="do_reply">
                                            </p>
@@ -165,24 +146,11 @@ if (
                             </div>
                         </div>
                     </div>');
-
-                // $servername = "localhost";
-                // $username = "root";
-                // $password = "mysql";
-                // $dbname = "comment";
-                // $conn = mysqli_connect($servername, $username, $password, $dbname);
-                // $query = "SELECT replies.post_id GROUP_CONCAT(comments.id separator \", \") as post_id 
-                //         FROM replies 
-                //         LEFT JOIN comments  
-                //         ON replies.post_id = comments.id
-                //         GROUP BY replies.id";
-                // $result = mysqli_query($conn, $query);
-
-                $replies = $entityManager->getRepository('Reply\Reply')->findAll();
+                $replies = $entityManager->getRepository('Reply\Reply')->findAll();    
                 foreach ($replies as $reply) {
+                    if($comment->getId() == $reply->getPostid()) {
                     print(' <div class="g-bg-reply">
                                         <div>
-                                         <input type="hidden" name="reply_post_id" value="' . $comment->getId() . '" required>
                                             <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
                                             <div class="">
                                                 <div class="">
@@ -192,7 +160,7 @@ if (
                                             </div>            <p>' . $reply->getComment() . '</p>
                                         </div>
                                     </div>');
-                }
+                }   }
                 print('</div>
                 </div>
             </div>');
