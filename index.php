@@ -70,28 +70,31 @@ if (
 <body>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,500&display=swap" rel="stylesheet">
+    <div class="topnav" id="myTopnav">
+        <h1 class="title1">VIDEO GAMES</h1>
+        <a href="#home" class="active">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="responseNav()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <h1 class="title2">VIDEO GAMES</h1>
+    </div>
     <div class="container">
         <div class="row" style="justify-content: center;">
 
-        <!-- TODO PADARYTI NAV BAR -->
-        <div class="container">
-                <div class="row" style="text-align: justify;">
-                    <div class="col-md-12">
-                        <div class="media-body u-shadow-v18 g-pa-30">
-                            <h1 class="title">VIDEO GAMES</h1>        
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- TODO PADARYTI NAV BAR -->
+
             <div class="container">
                 <div class="row" style="text-align: justify;">
                     <div class="col-md-12">
                         <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                                <img class="img" src="https://phantom-marca.unidadeditorial.es/8256e68fdfac5b6a6c792af7308d27e8/crop/0x0/1597x899/resize/1320/f/jpg/assets/multimedia/imagenes/2021/10/01/16330974723192.png" alt="">
+                            <img class="img" src="https://phantom-marca.unidadeditorial.es/8256e68fdfac5b6a6c792af7308d27e8/crop/0x0/1597x899/resize/1320/f/jpg/assets/multimedia/imagenes/2021/10/01/16330974723192.png" alt="">
                             <h1> ‘Squid Game’ in Video Games</h1>
-                        <span class="g-color-gray-dark-v4 g-font-size-12">October 11, 2021 08:31 am</span>
+                            <span class="g-color-gray-dark-v4 g-font-size-12">October 11, 2021 08:31 am</span>
                             <p><br>So you've recently wrapped up "Squid Game," the fabulous new Netflix Inc. show about a gathering of unfortunate individuals who contend in destructive matches to dominate a gigantic monetary reward. Presently you're searching for another thing to satisfy your yearnings for innovative fierceness and stunning unexpected developments. </p><br>
                             <p>Uplifting news: There are a great deal of computer games that fit the bill.</p><br>
 
@@ -219,6 +222,14 @@ if (
             document.getElementById("form-" + commentId).style.display = "none";
         } else {
             document.getElementById("form-" + commentId).style.display = "";
+        }
+    }
+    function responseNav() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
         }
     }
 </script>
