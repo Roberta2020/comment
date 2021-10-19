@@ -72,6 +72,8 @@ if (
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <div class="topnav" id="myTopnav">
         <h1 class="title1">VIDEO GAMES</h1>
         <a href="#home" class="active">Home</a>
@@ -85,9 +87,6 @@ if (
     </div>
     <div class="container">
         <div class="row" style="justify-content: center;">
-
-            <!-- TODO PADARYTI NAV BAR -->
-
             <div class="container">
                 <div class="row" style="text-align: justify;">
                     <div class="col-md-12">
@@ -141,15 +140,11 @@ if (
                 </div>
             </div>
             <?php
-
-            // TODO PAKEISTI KAD NEBUTU BALTO IMG FONO
-            // TODO PASTYLINT REPLY SECTION - KRASTAI
-
             $comments = $entityManager->getRepository('Comment\Comment')->findAll();
             foreach ($comments as $comment) {
                 print(' <div class="col-md-8">
                 <div class="media g-mb-30 media-comment">
-                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat1.jpg" alt="Image Description">
+                    <img class="d-flex g-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
                     <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                         <div class="g-mb-15">
                             <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $comment->getName() . '</h5>
@@ -195,7 +190,7 @@ if (
                     if ($comment->getId() == $reply->getPostid()) {
                         print(' <div class="g-bg-reply">
                                         <div class="reply">
-                                            <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat1.jpg" alt="Image Description">
+                                            <img class="d-flex g-50 rounded-circle g-mt-3 g-mr-15" src="cute-cat.jpg" alt="Image Description">
                                             <div class="">
                                                 <div class="">
                                                     <h5 class="h5 g-color-gray-dark-v1 mb-0">' . $reply->getName() . '</h5>
@@ -209,8 +204,45 @@ if (
                 print('</div>
                 </div>
             </div>');
-            }
+            }          
             ?>
+             <div class="footer-clean">
+            <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Video Games © 2021</p>
+                    </div>
+                </div>
+            </div>
+            </footer>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
             <!-- TODO PADARYTI FOOTERI -->
 </body>
 <script>
