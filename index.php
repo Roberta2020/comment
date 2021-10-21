@@ -12,6 +12,9 @@ function redirect_to_root()
     header("Location: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 }
 
+// TODO VALIDACIJA: TURI MESTI KAS NEGERAI SUVESTA EMAIL SU TASKU IR @
+// TODO NAUJAS KOMENTARAS TURI ATSIRASTI VIRSUJE
+
 // Add comment
 if (
     isset($_POST['add_comment'])
@@ -151,7 +154,7 @@ if (
                             <span class="g-color-gray-dark-v4 g-font-size-12">' . $date->format('F d, Y h:i a') . '</span>
                         </div>
                         <p>' . $comment->getComment() . '</p>
-                        <a data-id="' . $comment->getId() . '" onclick="showReplyForm(this)" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#">
+                        <a data-id="' . $comment->getId() . '" onclick="showReplyForm(this)" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="javascript:void();">
                             <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
                             Reply
                         </a>
@@ -247,7 +250,8 @@ if (
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    // TODO PAKEISTI KAD PASPAUDZIANT NEBUTU NUSOKAMA I VIRSU 
+    // TODO KOMENTARAS TURI ATSIRASTI BE PERKROVIMO 
+    // TODO PADARYTI KAD PO REPLY FORMA PASISLEPIA IR KOM ATSIRANDA BE PERKROVIMO
 
     function showReplyForm(self) {
         var commentId = self.getAttribute("data-id");
